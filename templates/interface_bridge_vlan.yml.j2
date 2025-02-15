@@ -1,0 +1,22 @@
+{% for vlan, id in vlans.items() %}
+{% set tagged = ["bridge"] %}
+{% set untagged = [] %}
+{% for iface, config in interfaces.items() %}
+{% if config.type | default("ethernet") in ["ethernet","bond","veth"] %}
+{% if config.bridged | default(True) %}
+{% set vlan_profile = config.vlan_profile | default(default_vlan_profile) %}
+{% if vlan in vlan_profiles[vlan_profile].tagged | default([]) %}
+{{ tagged.append(iface) }}
+{% elif vlan == vlan_profiles[vlan_profile].native %}
+{{ untagged.append(iface) }}
+{% endif %}
+{% endif %}
+{% endif %}
+{% endfor %}
+- comment: "{{ vlan }}"
+  bridge: "bridge"
+  vlan-ids: {{ id }}
+  disabled: false
+  tagged: "{{ tagged | join(',') | default(omit) }}"
+  untagged: "{{ untagged | join(',') | default(omit) }}"
+{% endfor %}

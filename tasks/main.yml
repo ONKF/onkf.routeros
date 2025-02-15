@@ -1,0 +1,23 @@
+---
+# tasks file for onkf.routeros
+- name: configure device
+  community.routeros.api_modify:
+    hostname: "{{ ansible_host }}"
+    username: "{{ ansible_user }}"
+    password: "{{ ansible_password }}"
+    handle_entries_content: remove_as_much_as_possible
+    handle_absent_entries: "{{ 'ignore' if item == 'interface ethernet' else 'remove' }}"
+    path: "{{ item }}"
+    data: "{{ lookup('template', item | replace(' ', '_') + '.yml.j2') | from_yaml | elvis_filter }}"
+  delegate_to: localhost
+  with_items:
+    - system identity
+    - system clock
+    - interface ethernet
+    - interface bonding
+    - interface veth
+    - interface bridge
+    - interface bridge port
+    - interface bridge vlan
+    - interface vlan
+    - "ip dhcp-client"

@@ -1,0 +1,8 @@
+{% for iface, config  in interfaces.items() %}
+{% if config.type | default('ethernet') == "vlan" %}
+- name: "{{ iface }}"
+  comment: "{{ config.comment | default(omit) }}"
+  vlan-id: {{ config.vlan if config.vlan is integer else vlans[config.vlan] }}
+  interface: "{{ config.vlan_interface | default('bridge') }}"
+{% endif %}
+{% endfor %}

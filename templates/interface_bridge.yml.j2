@@ -1,0 +1,9 @@
+- name: bridge
+  auto-mac: no
+  admin-mac: "{{ bridge_mac | upper }}"
+  protocol-mode: rstp
+  priority: "{{ bridge_priority }}"
+  vlan-filtering: yes
+{% if bridge_capsmode %}
+- name: capdp
+{% endif %}

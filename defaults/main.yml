@@ -1,0 +1,8 @@
+---
+# defaults file for onkf.routeros
+interfaces: {}
+
+timezone: "Europe/Berlin"
+
+bridge_capsmode: False
+bridge_priority: "0x4000"

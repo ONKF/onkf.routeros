@@ -1,0 +1,8 @@
+{% for iface, config in interfaces.items() %}
+{% if config.type | default("ethernet") == "veth" %}
+- name: "{{ iface }}"
+  address: "{{ config.veth_ip | default(omit) }}"
+  gateway: "{{ config.veth_ipv4gw | default(omit) }}"
+  gateway6: "{{ config.veth_ipv6gw | default(omit) }}"
+{% endif %}
+{% endfor %}

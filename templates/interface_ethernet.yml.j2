@@ -1,0 +1,11 @@
+{% for iface, config  in interfaces.items() %}
+{% if config.type | default('ethernet') == "ethernet" %}
+- name: "{{ iface }}"
+  default-name: "{{ iface }}"
+  comment: "{{ config.comment | default(omit) }}"
+  disabled: {{ config.disabled | default(omit) }}
+  poe-out: "{{ config.poe_out | default(omit) }}"
+  poe-voltage: "{{ config.poe_voltage | default(omit) }}"
+  poe-priority: "{{ config.poe_priority | default(omit) }}"
+{% endif %}
+{% endfor %}

@@ -1,0 +1,12 @@
+{% for iface, config in interfaces.items() %}
+{% if config.bridged | default(True) %}
+{% set vlan_profile = config.vlan_profile | default(default_vlan_profile) %}
+{% if config.type | default("ethernet") in ["ethernet","bond","veth"] %}
+- interface: "{{ iface }}"
+  pvid: {{ vlans[vlan_profiles[vlan_profile].native] }}
+  bridge: "bridge"
+  edge: {{ config.bridge_edge | default(omit) }}
+  bpdu-guard: {{ config.bridge_bpdu_guard | default(omit) }}
+{% endif %}
+{% endif %}
+{% endfor %}

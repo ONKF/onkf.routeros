@@ -1,0 +1,9 @@
+{% for iface, config  in interfaces.items() %}
+{% if config.type | default('ethernet') == "bond" %}
+- name: "{{ iface }}"
+  mode: "{{ config.bond_mode }}"
+  comment: "{{ config.comment | default(omit) }}"
+  disabled: "{{ config.disabled | default(omit) }}"
+  slaves: "{{ config.bond_slaves | join(",") }}"
+{% endif %}
+{% endfor %}
