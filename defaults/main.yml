@@ -1,6 +1,7 @@
 ---
 # defaults file for onkf.routeros
 interfaces: {}
+vlans: {}
 
 timezone: "Europe/Berlin"
 
