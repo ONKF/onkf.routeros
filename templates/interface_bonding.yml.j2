@@ -5,5 +5,6 @@
   comment: "{{ config.comment | default(omit) }}"
   disabled: "{{ config.disabled | default(omit) }}"
   slaves: "{{ config.bond_slaves | join(",") }}"
+  mlag-id: {{ config.bond_mlag_id | default(omit) }}
 {% endif %}
 {% endfor %}
