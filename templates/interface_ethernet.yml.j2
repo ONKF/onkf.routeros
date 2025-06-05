@@ -7,5 +7,6 @@
   poe-out: "{{ config.poe_out | default(omit) }}"
   poe-voltage: "{{ config.poe_voltage | default(omit) }}"
   poe-priority: "{{ config.poe_priority | default(omit) }}"
+  sfp-ignore-rx-los: {{ config.sfp_ignore_rx_los | default(omit) }}
 {% endif %}
 {% endfor %}
