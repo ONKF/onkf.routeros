@@ -11,14 +11,14 @@
     data: "{{ lookup('template', item | replace(' ', '_') + '.yml.j2') | from_yaml | elvis_filter }}"
   delegate_to: localhost
   with_items:
-    - system identity
-    - system clock
-    - interface ethernet
-    - interface bonding
-    - interface veth
-    - interface bridge
-    - interface bridge port
-    - interface bridge vlan
-    - interface bridge mlag
-    - interface vlan
+    - "system identity"
+    - "system clock"
+    - "interface ethernet"
+    - "interface bonding"
+    - "interface veth"
+    - "interface bridge"
+    - "interface bridge port"
+    - "interface bridge vlan"
+    - "interface bridge mlag"
+    - "interface vlan"
     - "ip dhcp-client"
