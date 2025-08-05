@@ -19,6 +19,5 @@
     - "interface bridge"
     - "interface bridge port"
     - "interface bridge vlan"
-    - "interface bridge mlag"
     - "interface vlan"
     - "ip dhcp-client"

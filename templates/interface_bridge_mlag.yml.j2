@@ -1,7 +1,0 @@
-{% if bridge_mlag_peer_port is defined %}
-- bridge: "bridge"
-  peer-port: "{{ bridge_mlag_peer_port }}"
-{% else %}
-- bridge: "none"
-  peer-port: none
-{% endif %}
