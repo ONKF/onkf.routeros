@@ -4,5 +4,6 @@
   comment: "{{ config.comment | default(omit) }}"
   vlan-id: {{ config.vlan if config.vlan is integer else vlans[config.vlan] }}
   interface: "{{ config.vlan_interface | default('bridge') }}"
+  arp: "{{ config.arp | default(omit) }}"
 {% endif %}
 {% endfor %}
